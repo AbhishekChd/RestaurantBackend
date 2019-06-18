@@ -2,13 +2,17 @@ package io.github.abhishekchd.restaurantbackend.repositoryservices;
 
 import io.github.abhishekchd.restaurantbackend.dto.Order;
 import io.github.abhishekchd.restaurantbackend.dto.Status;
+import io.github.abhishekchd.restaurantbackend.exchanges.GetOrdersListResponse;
+import io.github.abhishekchd.restaurantbackend.models.OrderEntity;
 import io.github.abhishekchd.restaurantbackend.repository.OrderRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Provider;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderRepositoryServiceImpl implements OrderRepositoryService {
@@ -22,7 +26,21 @@ public class OrderRepositoryServiceImpl implements OrderRepositoryService {
 
     @Override
     public List<Order> getOrders(String restaurantId) {
-        return null;
+        Optional<List<OrderEntity>> response = orderRepository.findorderbyrestaurantid(restaurantId);
+        List<Order> ans= new ArrayList<>();
+        if(response.isPresent()) {
+            ModelMapper modelMapper=modelMapperProvider.get();
+            List<OrderEntity> fromrepo=response.get();
+            //iterating and adding contents to order
+            for( int i=0;i<fromrepo.size();i++)
+            {
+                ans.add(modelMapper.map(fromrepo.get(i),Order.class));
+            }
+            return ans;
+        } else {
+            return null; //TODO : Order Not found exception
+        }
+
     }
 
     @Override
