@@ -32,10 +32,8 @@ public class OrderRepositoryServiceImpl implements OrderRepositoryService {
             for (OrderEntity orderEntity : fromrepo) {
                 ans.add(modelMapper.map(orderEntity, Order.class));
             }
-            return ans;
-        } else {
-            return null; //TODO : Order Not found exception
         }
+        return ans;
     }
 
     @Override public List<Order> getActiveOrders(String restaurantId) {
