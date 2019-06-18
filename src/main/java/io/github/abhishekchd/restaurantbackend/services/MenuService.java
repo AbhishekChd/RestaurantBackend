@@ -4,7 +4,9 @@ import io.github.abhishekchd.restaurantbackend.dto.Item;
 import io.github.abhishekchd.restaurantbackend.exceptions.ItemNotFoundInRestaurantMenuException;
 import io.github.abhishekchd.restaurantbackend.exchanges.GetMenuResponse;
 import io.github.abhishekchd.restaurantbackend.exchanges.MenuModifiedResponse;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface MenuService {
 
     /**
