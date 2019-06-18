@@ -10,13 +10,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
-    @Autowired OrderRepositoryService orderRepositoryService;
+    @Autowired
+    OrderRepositoryService orderRepositoryService;
 
-    @Override public GetOrdersListResponse getOrderHistory(String restaurantId) {
+    @Override
+    public GetOrdersListResponse getOrderHistory(String restaurantId) {
         List<Order> orders = orderRepositoryService.getAllOrders(restaurantId);
         ArrayList<Order> previousOrders = new ArrayList<>();
         for (Order order : orders) {
@@ -30,11 +33,18 @@ public class OrderServiceImpl implements OrderService {
         return new GetOrdersListResponse(previousOrders);
     }
 
-    @Override public GetOrdersListResponse getActiveOrders(String restaurantId) {
-        return new GetOrdersListResponse(new ArrayList<>());
+    @Override
+    public GetOrdersListResponse getActiveOrders(String restaurantId) {
+        List<Order> orders = orderRepositoryService.getActiveOrders(restaurantId);
+        GetOrdersListResponse ans = new GetOrdersListResponse(orders);
+        return ans;
     }
 
-    @Override public ModifiedOrderResponse updateOrderStatus(String restaurantId, String orderId, Status status) {
-        return new ModifiedOrderResponse(new Order(), "Dummy message");
+    @Override
+    public ModifiedOrderResponse updateOrderStatus(String restaurantId, String orderId, Status status) {
+        Optional<Order> updatedorder = orderRepositoryService.updateOrderStatus(restaurantId, orderId, status);
+        //TODO is kuch bhi ko change krna hai
+        ModifiedOrderResponse ans = new ModifiedOrderResponse(updatedorder.get(),"kuch bhi");
+        return ans;
     }
 }
