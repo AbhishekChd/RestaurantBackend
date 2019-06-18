@@ -1,15 +1,13 @@
-package io.github.abhishekchd.restaurantbackend.repositoryService;
+package io.github.abhishekchd.restaurantbackend.repositoryservice;
 
 import io.github.abhishekchd.restaurantbackend.dto.Order;
 import io.github.abhishekchd.restaurantbackend.dto.Status;
-import io.github.abhishekchd.restaurantbackend.models.OrderEntity;
 import io.github.abhishekchd.restaurantbackend.repository.OrderRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.Provider;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-import java.util.Optional;
 
 public class OrderRepositoryServiceImpl implements OrderRepositoryService{
 
