@@ -33,7 +33,7 @@ public class RestaurantBackendApplication {
     @Bean
     CommandLineRunner initDatabase(OrderRepository repository) {
         return args -> {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 300; i++) {
                 Random ran = new Random();
                 Status ran_status = Status.PLACED;
                 int ran_for_name = ran.nextInt(3);
