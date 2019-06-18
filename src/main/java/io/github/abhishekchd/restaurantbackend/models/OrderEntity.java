@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 
 import io.github.abhishekchd.restaurantbackend.dto.Item;
+import io.github.abhishekchd.restaurantbackend.dto.Status;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -29,6 +30,9 @@ public class OrderEntity {
 
     @NotNull
     private int total = 0;
+
+    @NotNull
+    private Status status;
 
     @NotNull
     private String placedTime;

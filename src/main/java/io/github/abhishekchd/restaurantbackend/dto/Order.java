@@ -32,15 +32,4 @@ public class Order {
 
     @NotNull
     private String timePlaced;
-
-    public enum Status {
-        PLACED,
-        ACCEPTED,
-        PREPARING,
-        READY_FOR_PICK_UP,
-        COMPLETED,
-        CANCELLED,
-        REJECTED
-    }
-
 }
