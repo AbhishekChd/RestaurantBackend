@@ -103,17 +103,23 @@ public class RestaurantController {
     }
 
     @PutMapping(ORDER_API)
-    public ResponseEntity<ModifiedOrderResponse> updateOrderStatus(GetOrderStatusRequest getOrderStatusRequest) {
+    public ResponseEntity<ModifiedOrderResponse> updateOrderStatus(@RequestBody GetOrderStatusRequest getOrderStatusRequest) {
         String restaurantId = getOrderStatusRequest.getRestaurantId();
-        Status status = getOrderStatusRequest.getStatus();
+        String statusString = getOrderStatusRequest.getStatus();
         String orderId = getOrderStatusRequest.getOrderId();
 
         log.info("GetOrderStatusRequest  {}", getOrderStatusRequest);
 
         //todo add exception for status and orderId as well
-        if (StringUtils.isEmpty(restaurantId) || StringUtils.isEmpty(orderId) || status == null) {
+        if (StringUtils.isEmpty(restaurantId) || StringUtils.isEmpty(orderId) || StringUtils.isEmpty(statusString)) {
             return ResponseEntity.badRequest().build();
         } else {
+            Status status;
+            try {
+                status = Status.valueOf(statusString.toUpperCase());
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().build();
+            }
             ModifiedOrderResponse modifiedOrderResponse = orderService.updateOrderStatus(restaurantId, orderId, status);
             return ResponseEntity.ok().body(modifiedOrderResponse);
         }

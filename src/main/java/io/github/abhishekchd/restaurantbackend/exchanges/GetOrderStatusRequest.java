@@ -1,7 +1,5 @@
 package io.github.abhishekchd.restaurantbackend.exchanges;
 
-
-import io.github.abhishekchd.restaurantbackend.dto.Status;
 import lombok.*;
 
 @NoArgsConstructor
@@ -10,5 +8,5 @@ import lombok.*;
 public class GetOrderStatusRequest {
     private String restaurantId;
     private String orderId;
-    private Status status;
+    private String status;
 }
