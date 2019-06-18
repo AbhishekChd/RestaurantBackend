@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Scope;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Random;
 
 @SpringBootApplication
 @Slf4j
@@ -32,24 +33,72 @@ public class RestaurantBackendApplication {
     @Bean
     CommandLineRunner initDatabase(OrderRepository repository) {
         return args -> {
-            log.info("Preloading " + repository.save(new OrderEntity(
-                    "#1",
-                    "301728",
-                    "abhishek",
-                    new ArrayList<>(),
-                    100,
-                    Status.COMPLETED,
-                    LocalTime.now().toString()
-            )));
-            log.info("Preloading " + repository.save(new OrderEntity(
-                    "#2",
-                    "301728",
-                    "abhishek",
-                    new ArrayList<>(),
-                    20,
-                    Status.CANCELLED,
-                    LocalTime.now().toString()
-            )));
+            for (int i = 0; i < 100; i++) {
+                Random ran = new Random();
+                Status ran_status = Status.PLACED;
+                int ran_for_name = ran.nextInt(3);
+                int random = ran.nextInt(7);
+                String res_id = "301728";
+                String name = "Shivansh";
+                switch (ran_for_name) {
+                    case 0: {
+                        name = "Shivansh";
+                        res_id = "301728";
+                        break;
+                    }
+                    case 1: {
+                        name = "Abhishek";
+                        res_id = "301286";
+                        break;
+                    }
+                    case 2: {
+                        name = "Fatma";
+                        res_id = "307843";
+                        break;
+                    }
+                    default: {
+                        name = "Shivansh";
+                        res_id = "301728";
+
+                    }
+                }
+                switch (random) {
+                    case 0:
+                        ran_status = Status.PLACED;
+                        break;
+                    case 1:
+                        ran_status = Status.CANCELLED;
+                        break;
+                    case 2:
+                        ran_status = Status.COMPLETED;
+                        break;
+                    case 3:
+                        ran_status = Status.PREPARING;
+                        break;
+                    case 4:
+                        ran_status = Status.REJECTED;
+                        break;
+                    case 5:
+                        ran_status = Status.READY_FOR_PICK_UP;
+                        break;
+                    case 6:
+                        ran_status = Status.ACCEPTED;
+                        break;
+                    default:
+                        ran_status = Status.PLACED;
+
+                }
+                log.info("Preloading " + repository.save(new OrderEntity(
+                        "#1",
+                        res_id,
+                        name,
+                        new ArrayList<>(),
+                        100,
+                        ran_status,
+                        LocalTime.now().toString()
+                )));
+            }
+
         };
     }
 
