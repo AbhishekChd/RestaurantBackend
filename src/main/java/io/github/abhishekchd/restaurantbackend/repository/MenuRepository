@@ -9,7 +9,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface MenuRepository extends MongoRepository<MenuEntity, String> {
 
     Optional<MenuEntity> findMenuByRestaurantId(String restaurantId);
-
-//    Optional<MenuEntity> updateMenuByRestaurantId(String restaurantId);
 }
 
