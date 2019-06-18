@@ -24,7 +24,7 @@ public class MenuServiceImpl implements MenuService {
         return new MenuModifiedResponse(new Menu());
     }
 
-    @Override public MenuModifiedResponse findAndUpdateMenuItem(String itemId, String restaurantId) {
+    @Override public MenuModifiedResponse findAndUpdateMenuItem(String restaurantId, String itemId, Item item) {
         return new MenuModifiedResponse();
     }
 
