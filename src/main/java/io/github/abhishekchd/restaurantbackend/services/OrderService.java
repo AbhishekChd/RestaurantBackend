@@ -1,13 +1,13 @@
 package io.github.abhishekchd.restaurantbackend.services;
 
-import io.github.abhishekchd.restaurantbackend.dto.Order;
+import io.github.abhishekchd.restaurantbackend.dto.Status;
 import io.github.abhishekchd.restaurantbackend.exchanges.ModifiedOrderResponse;
 import io.github.abhishekchd.restaurantbackend.exchanges.GetOrdersListResponse;
 
 public interface OrderService {
 
     /**
-     * Get all orders that have {@link io.github.abhishekchd.restaurantbackend.dto.Order.Status}
+     * Get all orders that have {@link io.github.abhishekchd.restaurantbackend.dto.Status}
      * Accepted, Rejected or Cancelled
      *
      * @param restaurantId Id of the restaurant
@@ -30,8 +30,8 @@ public interface OrderService {
      *
      * @param restaurantId Id of the restaurant
      * @param orderId      Id of the current order
-     * @param status       {@link io.github.abhishekchd.restaurantbackend.dto.Order.Status} of the order
+     * @param status       {@link io.github.abhishekchd.restaurantbackend.dto.Status} of the order
      * @return Modified Order
      */
-    ModifiedOrderResponse updateOrderStatus(String restaurantId, String orderId, Order.Status status);
+    ModifiedOrderResponse updateOrderStatus(String restaurantId, String orderId, Status status);
 }
