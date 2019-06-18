@@ -32,5 +32,4 @@ public class MenuEntity {
 
     @NotNull
     private List<Item> items = new ArrayList();
-
 }

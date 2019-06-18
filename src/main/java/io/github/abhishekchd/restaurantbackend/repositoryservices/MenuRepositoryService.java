@@ -1,13 +1,13 @@
 package io.github.abhishekchd.restaurantbackend.repositoryservices;
 
 import io.github.abhishekchd.restaurantbackend.dto.Menu;
-import org.springframework.stereotype.Service;
 
 public interface MenuRepositoryService {
 
     /**
      * TODO:  Implement findMenu
      * Return the restaurant menu.
+     *
      * @param restaurantId id of the restaurant
      * @return the restaurant's menu
      */
@@ -16,6 +16,7 @@ public interface MenuRepositoryService {
     /**
      * TODO:  Implement updateMenu
      * Return the restaurant menu.
+     *
      * @param restaurantId id of the restaurant
      * @return the restaurant's menu
      */

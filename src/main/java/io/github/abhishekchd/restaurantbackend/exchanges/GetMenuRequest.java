@@ -1,17 +1,12 @@
 package io.github.abhishekchd.restaurantbackend.exchanges;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@Getter
 @Data
-
 public class GetMenuRequest {
     private String restaurantId;
-
-    public String getRestaurantId() {
-        return restaurantId;
-    }
 }
