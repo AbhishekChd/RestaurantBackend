@@ -1,4 +1,4 @@
-package io.github.abhishekchd.restaurantbackend.repositoryservice;
+package io.github.abhishekchd.restaurantbackend.repositoryservices;
 
 import io.github.abhishekchd.restaurantbackend.dto.Order;
 import io.github.abhishekchd.restaurantbackend.dto.Status;

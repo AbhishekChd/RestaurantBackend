@@ -1,4 +1,4 @@
-package io.github.abhishekchd.restaurantbackend.repositoryservice;
+package io.github.abhishekchd.restaurantbackend.repositoryservices;
 
 import io.github.abhishekchd.restaurantbackend.dto.Menu;
 import io.github.abhishekchd.restaurantbackend.models.MenuEntity;
