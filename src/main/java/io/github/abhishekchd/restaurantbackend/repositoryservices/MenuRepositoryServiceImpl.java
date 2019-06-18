@@ -26,7 +26,7 @@ public class MenuRepositoryServiceImpl implements MenuRepositoryService {
 
         Optional<MenuEntity> menuById = menuRepository.findMenuByRestaurantId(restaurantId);
 
-        Menu menu = null;
+        Menu menu = new Menu();
 
         if (menuById.isPresent()) {
             menu = modelMapper.map(menuById.get(), Menu.class);
