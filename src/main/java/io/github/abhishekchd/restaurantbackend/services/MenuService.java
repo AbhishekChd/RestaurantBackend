@@ -27,11 +27,12 @@ public interface MenuService {
     /**
      * Find the item in Menu and update it
      *
-     * @param itemId       id of he item
      * @param restaurantId if of restaurant
+     * @param itemId       id of he item
+     * @param item         item to be updated
      * @return Modified Menu
      */
-    MenuModifiedResponse findAndUpdateMenuItem(String itemId, String restaurantId);
+    MenuModifiedResponse findAndUpdateMenuItem(String restaurantId, String itemId, Item item);
 
     /**
      * Find the item in Menu and delete it
