@@ -2,28 +2,39 @@ package io.github.abhishekchd.restaurantbackend.repositoryservices;
 
 import io.github.abhishekchd.restaurantbackend.dto.Order;
 import io.github.abhishekchd.restaurantbackend.dto.Status;
+import io.github.abhishekchd.restaurantbackend.exchanges.GetOrdersListResponse;
+import io.github.abhishekchd.restaurantbackend.exchanges.ModifiedOrderResponse;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface OrderRepositoryService {
 
-
     /**
-     * TODO:  Implement getArchivedOrders.
-     * Place order based on the cart.
-     * @param restaurantId - restaurantId of restaurant whose orders need to be retrieved.
-     * @return return -  orders that were placed.
+     * Get all orders
+     *
+     * @param restaurantId Id of the restaurant
+     * @return List of orders
      */
-
-    List<Order> getOrders(String restaurantId);
+    List<Order> getAllOrders(String restaurantId);
 
 
     /**
-     * TODO:  Implement updateStatus.
-     * Place order based on the cart.
-     * @param restaurantId - restaurantId of restaurant whose current orders need to be retrieved.
-     * @return return - all the orders that were just placed.
+     * Get all orders that are active
+     *
+     * @param restaurantId Id of the restaurant
+     * @return List of active orders
      */
+    List<Order> getActiveOrders(String restaurantId);
 
-    Status UpdateStatus(String restaurantId, String OrderId, Status status);
+
+    /**
+     * Update current order status
+     *
+     * @param restaurantId Id of the restaurant
+     * @param orderId      Id of the current order
+     * @param status       {@link io.github.abhishekchd.restaurantbackend.dto.Status} of the order
+     * @return Modified Order
+     */
+    Optional<Order> updateOrderStatus(String restaurantId, String orderId, Status status);
 }

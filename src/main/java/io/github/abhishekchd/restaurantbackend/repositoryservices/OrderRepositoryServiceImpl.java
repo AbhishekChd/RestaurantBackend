@@ -2,7 +2,6 @@ package io.github.abhishekchd.restaurantbackend.repositoryservices;
 
 import io.github.abhishekchd.restaurantbackend.dto.Order;
 import io.github.abhishekchd.restaurantbackend.dto.Status;
-import io.github.abhishekchd.restaurantbackend.exchanges.GetOrdersListResponse;
 import io.github.abhishekchd.restaurantbackend.models.OrderEntity;
 import io.github.abhishekchd.restaurantbackend.repository.OrderRepository;
 import org.modelmapper.ModelMapper;
@@ -23,28 +22,27 @@ public class OrderRepositoryServiceImpl implements OrderRepositoryService {
     @Autowired
     private OrderRepository orderRepository;
 
-
-    @Override
-    public List<Order> getOrders(String restaurantId) {
+    @Override public List<Order> getAllOrders(String restaurantId) {
         Optional<List<OrderEntity>> response = orderRepository.findorderbyrestaurantid(restaurantId);
-        List<Order> ans= new ArrayList<>();
-        if(response.isPresent()) {
-            ModelMapper modelMapper=modelMapperProvider.get();
-            List<OrderEntity> fromrepo=response.get();
+        List<Order> ans = new ArrayList<>();
+        if (response.isPresent()) {
+            ModelMapper modelMapper = modelMapperProvider.get();
+            List<OrderEntity> fromrepo = response.get();
             //iterating and adding contents to order
-            for( int i=0;i<fromrepo.size();i++)
-            {
-                ans.add(modelMapper.map(fromrepo.get(i),Order.class));
+            for (OrderEntity orderEntity : fromrepo) {
+                ans.add(modelMapper.map(orderEntity, Order.class));
             }
             return ans;
         } else {
             return null; //TODO : Order Not found exception
         }
-
     }
 
-    @Override
-    public Status UpdateStatus(String restaurantId, String OrderId, Status status) {
+    @Override public List<Order> getActiveOrders(String restaurantId) {
         return null;
+    }
+
+    @Override public Optional<Order> updateOrderStatus(String restaurantId, String orderId, Status status) {
+        return Optional.empty();
     }
 }

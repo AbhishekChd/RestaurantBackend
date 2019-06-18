@@ -1,5 +1,6 @@
 package io.github.abhishekchd.restaurantbackend.repositoryservices;
 
+import io.github.abhishekchd.restaurantbackend.dto.Item;
 import io.github.abhishekchd.restaurantbackend.dto.Menu;
 import io.github.abhishekchd.restaurantbackend.models.MenuEntity;
 import io.github.abhishekchd.restaurantbackend.repository.MenuRepository;
@@ -35,7 +36,11 @@ public class MenuRepositoryServiceImpl implements MenuRepositoryService {
         return menu;
     }
 
-    public Menu updateMenu(String restaurantId) {
+    @Override public Menu addMenuItem(String restaurantId, Item item) {
+        return null;
+    }
+
+    @Override public Menu findAndUpdateMenuItem(String restaurantId, String itemId, Item item) {
         ModelMapper modelMapper = modelMapperProvider.get();
 
 //        Optional<MenuEntity> menuEntity = menuRepository.updateMenuByRestaurantId(restaurantId);
@@ -47,5 +52,13 @@ public class MenuRepositoryServiceImpl implements MenuRepositoryService {
 //        }
 
         return menu;
+    }
+
+    @Override public Menu findAndDeleteMenuItem(String itemId, String restaurantId) {
+        return null;
+    }
+
+    @Override public Optional<Item> findItem(String itemId, String restaurantId) {
+        return Optional.empty();
     }
 }
