@@ -23,7 +23,7 @@ public class OrderRepositoryServiceImpl implements OrderRepositoryService {
     private OrderRepository orderRepository;
 
     @Override public List<Order> getAllOrders(String restaurantId) {
-        Optional<List<OrderEntity>> response = orderRepository.findorderbyrestaurantid(restaurantId);
+        Optional<List<OrderEntity>> response = orderRepository.findOrdersByRestaurantId(restaurantId);
         List<Order> ans = new ArrayList<>();
         if (response.isPresent()) {
             ModelMapper modelMapper = modelMapperProvider.get();
