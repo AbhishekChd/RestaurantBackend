@@ -3,9 +3,7 @@ package io.github.abhishekchd.restaurantbackend.services;
 import io.github.abhishekchd.restaurantbackend.dto.Status;
 import io.github.abhishekchd.restaurantbackend.exchanges.ModifiedOrderResponse;
 import io.github.abhishekchd.restaurantbackend.exchanges.GetOrdersListResponse;
-import org.springframework.stereotype.Service;
 
-@Service
 public interface OrderService {
 
     /**
