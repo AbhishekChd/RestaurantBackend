@@ -4,12 +4,14 @@ import io.github.abhishekchd.restaurantbackend.dto.Order;
 import io.github.abhishekchd.restaurantbackend.dto.Status;
 import io.github.abhishekchd.restaurantbackend.repository.OrderRepository;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.Provider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.inject.Provider;
 import java.util.List;
 
-public class OrderRepositoryServiceImpl implements OrderRepositoryService{
+@Service
+public class OrderRepositoryServiceImpl implements OrderRepositoryService {
 
     @Autowired
     private Provider<ModelMapper> modelMapperProvider;
