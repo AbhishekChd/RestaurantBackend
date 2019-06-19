@@ -7,6 +7,8 @@ import io.github.abhishekchd.restaurantbackend.models.MenuEntity;
 import io.github.abhishekchd.restaurantbackend.repository.ItemRepository;
 import io.github.abhishekchd.restaurantbackend.repository.MenuRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;;
@@ -49,44 +51,61 @@ public class MenuRepositoryServiceImpl implements MenuRepositoryService {
         Menu updatedMenu = null;
 
         if (menuEntity.isPresent()) {
-            itemRepository.insert(modelMapper.map(item, ItemEntity.class));
-            Optional<MenuEntity> updatedMenuEntity = menuRepository.findMenuByRestaurantId(restaurantId);
-            updatedMenu = modelMapper.map(updatedMenuEntity.get(), Menu.class);
+            menuEntity.get().getItems().add(item);
+            MenuEntity s = menuRepository.save(menuEntity.get());
+            return modelMapper.map(s, Menu.class);
         }
 
-        return updatedMenu;
+        return null;
     }
 
     @Override
     public Menu findAndUpdateMenuItem(String restaurantId, String itemId, Item item) {
         ModelMapper modelMapper = modelMapperProvider.get();
 
-        Optional<ItemEntity> optionalItemEntity = itemRepository.findItemByItemId(itemId);
+        Optional<MenuEntity> menuEntity = menuRepository.findMenuByRestaurantId(restaurantId);
 
-        if (optionalItemEntity.isPresent()) {
-            itemRepository.save(modelMapper.map(item, ItemEntity.class));
+        Menu updatedMenu = null;
+
+        if (menuEntity.isPresent()) {
+            List<Item> items = menuEntity.get().getItems();
+            ArrayList<Item> updatedItems = new ArrayList<>();
+            for (Item item1 : items) {
+                if (item1.getItemId().equals(itemId)) {
+                    item1 = item;
+                }
+                updatedItems.add(item1);
+            }
+            menuEntity.get().setItems(updatedItems);
+            MenuEntity s = menuRepository.save(menuEntity.get());
+            return modelMapper.map(s, Menu.class);
         }
 
-        Optional<MenuEntity> updatedMenuEntity = menuRepository.findMenuByRestaurantId(restaurantId);
-        Menu updatedMenu = modelMapper.map(updatedMenuEntity.get(), Menu.class);
-
-        return updatedMenu;
+        return null;
     }
 
     @Override
     public Menu findAndDeleteMenuItem(String itemId, String restaurantId) {
         ModelMapper modelMapper = modelMapperProvider.get();
 
-        Optional<ItemEntity> optionalItemEntity = itemRepository.findItemByItemId(itemId);
+        Optional<MenuEntity> menuEntity = menuRepository.findMenuByRestaurantId(restaurantId);
 
-        if (optionalItemEntity.isPresent()) {
-            itemRepository.deleteById(itemId);
+        Menu updatedMenu = null;
+
+        if (menuEntity.isPresent()) {
+            List<Item> items = menuEntity.get().getItems();
+            ArrayList<Item> updatedItems = new ArrayList<>();
+            for (Item item1 : items) {
+                if (!item1.getItemId().equals(itemId)) {
+                    updatedItems.add(item1);
+                }
+            }
+            menuEntity.get().setItems(updatedItems);
+            MenuEntity s = menuRepository.save(menuEntity.get());
+            return modelMapper.map(s, Menu.class);
         }
 
-        Optional<MenuEntity> updatedMenuEntity = menuRepository.findMenuByRestaurantId(restaurantId);
-        Menu updatedMenu = modelMapper.map(updatedMenuEntity.get(), Menu.class);
-
-        return updatedMenu;
+        return null;
     }
 
     @Override
