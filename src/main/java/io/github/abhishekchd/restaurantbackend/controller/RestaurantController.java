@@ -44,7 +44,7 @@ public class RestaurantController {
     }
 
     @PostMapping(ITEM_API)
-    public ResponseEntity<MenuModifiedResponse> addMenuItem(AddMenuItemRequest addMenuItemRequest) {
+    public ResponseEntity<MenuModifiedResponse> addMenuItem(@RequestBody AddMenuItemRequest addMenuItemRequest) {
         String restaurantId = addMenuItemRequest.getRestaurantId();
         Item item = addMenuItemRequest.getItem();
         if (StringUtils.isEmpty(restaurantId) || item == null) {
@@ -56,7 +56,7 @@ public class RestaurantController {
     }
 
     @PutMapping(ITEM_API)
-    public ResponseEntity<MenuModifiedResponse> updateMenuItem(UpdateMenuItemRequest updateMenuItemRequest) {
+    public ResponseEntity<MenuModifiedResponse> updateMenuItem(@RequestBody UpdateMenuItemRequest updateMenuItemRequest) {
         String restaurantId = updateMenuItemRequest.getRestaurantId();
         String itemId = updateMenuItemRequest.getItemId();
         Item item = updateMenuItemRequest.getItem();

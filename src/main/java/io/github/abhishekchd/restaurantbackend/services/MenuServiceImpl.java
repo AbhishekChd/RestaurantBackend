@@ -9,6 +9,8 @@ import io.github.abhishekchd.restaurantbackend.repositoryservices.MenuRepository
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class MenuServiceImpl implements MenuService {
 
@@ -21,18 +23,19 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override public MenuModifiedResponse addMenuItem(String restaurantId, Item item) {
-        return new MenuModifiedResponse(new Menu());
+        return new MenuModifiedResponse(menuRepositoryService.addMenuItem(restaurantId, item));
     }
 
     @Override public MenuModifiedResponse findAndUpdateMenuItem(String restaurantId, String itemId, Item item) {
-        return new MenuModifiedResponse();
+        return new MenuModifiedResponse(menuRepositoryService.findAndUpdateMenuItem(restaurantId, itemId, item));
     }
 
     @Override public MenuModifiedResponse findAndDeleteMenuItem(String itemId, String restaurantId) {
-        return new MenuModifiedResponse();
+        return new MenuModifiedResponse(menuRepositoryService.findAndDeleteMenuItem(itemId, restaurantId));
     }
 
     @Override public Item findItem(String itemId, String restaurantId) throws ItemNotFoundInRestaurantMenuException {
-        return new Item();
+        Optional<Item> item = menuRepositoryService.findItem(itemId, restaurantId);
+        return item.orElseGet(Item::new);
     }
 }

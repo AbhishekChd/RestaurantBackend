@@ -89,7 +89,7 @@ public class RestaurantBackendApplication {
 
                 }
                 log.info("Preloading " + repository.save(new OrderEntity(
-                        "#1",
+                        "#" + i,
                         res_id,
                         name,
                         new ArrayList<>(),
